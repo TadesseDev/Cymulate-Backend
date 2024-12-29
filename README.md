@@ -1,62 +1,72 @@
-<!-- @format -->
-
-# Project Name
+# Cymulate Backend
 
 ## Description
 
-A brief overview of what this project does and its main features. _(Replace this text with your description)_
+Cymulate Backend is a server-side application designed to enhance cybersecurity awareness among clients. It provides a platform for users to register, log in, and engage in simulated phishing attempts to assess their awareness and response to cybersecurity threats.
+
+### Main Features
+
+- User Registration and Login
+- Phishing Simulations
+- Status Tracking
+- Email Notifications
 
 ## Installation
 
-1. Clone the repository:
+1. **Clone the repository**:
 
-```bash
-   git clone <repository-url>
-   cd <repository-directory>
+   ```bash
+   git clone git@github.com:TadesseDev/Cymulate-Backend.git
+   cd Cymulate-Backend
+   npm install
+
+   ```
+
+1. **Configure Environment Variables**:
+
+```env
+# Database Configuration
+MONGODB_URI=mongodb://host:port/db
+
+# Mail Configuration
+SERVICE=Gmail
+FROM=<someone@example.com>
+HOST=smtp.gmail.com
+MAILER_USER=<someone@example.com>
+MAIL_PORT=587
+SECURE=false
+PASSWORD=<your-app-password>
+DOMAIN=http://localhost:3000/
 ```
 
-1. Install dependencies:
+1. **Usage**:
 
-   ```bash
-   npm install
-   ```
+### Start the development server
 
-2. Add the `.env` file in the root directory with the following content:
+```bash
+npm run start:dev
+```
 
-   ```env
-   MONGODB_URI=mongodb://host:post/db
-   ```
+### Access the application
 
-   Replace the value of `MONGODB_URI` with the address of your MongoDB URI.
+Navigate to:
 
-## Usage
+<http://localhost:3000/>
 
-1. Start the development server:
+### Note: Ensure that the backend is running and the corresponding URL is set in the frontend .env file
 
-   ```bash
-   npm run start:dev
-   ```
+### Features
 
-   or
+- User registration and authentication
+- Creation and sending of phishing attempt emails
+- Viewing the status of each user's attempts
+- Email notifications for user actions
 
-   ```bash
-   npm run start
-   ```
+### Technologies Used
 
-2. Open your browser and navigate to:
+- NestJS
+- MongoDB
+- Nodemailer
+- TypeScript
 
-   ```
-   http://localhost:3000/
-   ```
-
-> Please, make sure the backedn is running and its url is set on the frontend .env file
-
-## Features
-
-- Feature 1 placeholder....
-- Feature 2 placeholder....
-- Feature 3 placeholder....
-
-## Technologies Used
-
-- Placeholder....
+> For a complete list of third-party dependencies, please refer to the package.json file.
