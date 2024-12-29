@@ -1,4 +1,7 @@
-export const generateVerificationEmailHtml = (link: string): string => `
+export const generateVerificationEmailHtml = (
+  content: string,
+  link: string,
+): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,10 +57,10 @@ export const generateVerificationEmailHtml = (link: string): string => `
   <div class="container">
     <h1>Congratulations!</h1>
     <p>
-      You have a reward waiting for you. To claim it, please follow the link below:
+      ${content}
     </p>
     <p>
-      <a href="${link}" target="_blank">Claim Your Reward</a>
+      <a href="${link}" target="_blank">follow this link</a>
     </p>
     <p class="footer">
       If you did not request this reward or believe this email was sent in error, please disregard it.

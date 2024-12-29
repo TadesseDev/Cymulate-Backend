@@ -21,7 +21,7 @@ export default class MailerService {
     });
   }
 
-  async sendMail(email: string, link: string): Promise<void> {
+  async sendMail(email: string, content, link: string): Promise<void> {
     try {
       const transporter = this.getTransport();
       const url = new URL(`${this.baseUrl}/attempts/update`);
@@ -33,7 +33,7 @@ export default class MailerService {
         from: process.env.FROM,
         to: email,
         subject: 'You have won a lottery',
-        html: generateVerificationEmailHtml(url.toString()),
+        html: generateVerificationEmailHtml(content, url.toString()),
       };
       await transporter.sendMail(mailOptions);
     } catch (error) {
