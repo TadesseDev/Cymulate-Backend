@@ -57,6 +57,7 @@ Navigate to:
 
 ### Features
 
+- Swagger documentation at <http://localhost:3000/api>>
 - User registration and authentication
 - Creation and sending of phishing attempt emails
 - Viewing the status of each user's attempts
