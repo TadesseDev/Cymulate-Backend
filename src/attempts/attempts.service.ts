@@ -1,26 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAttemptDto } from './dto/create-attempt.dto';
 import { UpdateAttemptDto } from './dto/update-attempt.dto';
+import { Attempt } from './entities/attempt.entity';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class AttemptsService {
+  constructor(
+    @InjectModel(Attempt.name) private readonly attemptModel: Model<Attempt>,
+  ) {}
   create(createAttemptDto: CreateAttemptDto) {
-    return 'This action adds a new attempt';
+    return this.attemptModel.create(createAttemptDto);
   }
 
   findAll() {
-    return `This action returns all attempts`;
+    return this.attemptModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} attempt`;
-  }
-
-  update(id: number, updateAttemptDto: UpdateAttemptDto) {
-    return `This action updates a #${id} attempt`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} attempt`;
+  update(id: string, updateAttemptDto: UpdateAttemptDto) {
+    return this.attemptModel.findByIdAndUpdate(id, updateAttemptDto, {
+      new: true,
+    });
   }
 }
