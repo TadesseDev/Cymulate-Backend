@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
+import { createHash } from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,8 @@ export class AuthService {
 
   async login({ email, password }: LoginDto): Promise<any> {
     const user = await this.usersService.findByEmail(email);
-    if (user?.password !== password) {
+    const hashToCompare = createHash('sha256').update(password).digest('hex');
+    if (user?.password !== hashToCompare) {
       throw new UnauthorizedException();
     }
     const payload = { email: user.email, _id: user._id };
