@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   findAll() {
-    return this.userModel.find().skip(1).limit(10).lean().exec();
+    return this.userModel.find().lean().exec();
   }
 
   findOne(id: number) {
