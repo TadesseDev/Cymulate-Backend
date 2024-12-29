@@ -4,14 +4,18 @@ import { UpdateAttemptDto } from './dto/update-attempt.dto';
 import { Attempt } from './entities/attempt.entity';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import MailerService from 'src/mailer/mailer.service';
 
 @Injectable()
 export class AttemptsService {
   constructor(
     @InjectModel(Attempt.name) private readonly attemptModel: Model<Attempt>,
+    private readonly mailer: MailerService,
   ) {}
-  create(createAttemptDto: CreateAttemptDto) {
-    return this.attemptModel.create(createAttemptDto);
+  async create(createAttemptDto: CreateAttemptDto) {
+    const result = await this.attemptModel.create(createAttemptDto);
+    this.mailer.sendMail(createAttemptDto.email, result._id.toString());
+    return result;
   }
 
   findAll() {
