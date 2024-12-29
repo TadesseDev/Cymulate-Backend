@@ -14,7 +14,7 @@ export class AttemptsService {
   ) {}
   async create(createAttemptDto: CreateAttemptDto) {
     const result = await this.attemptModel.create(createAttemptDto);
-    this.mailer.sendMail(createAttemptDto.email, result._id.toString());
+    await this.mailer.sendMail(createAttemptDto.email, result._id.toString());
     return result;
   }
 
