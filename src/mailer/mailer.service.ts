@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import * as nodemailer from 'nodemailer';
 import { URL, URLSearchParams } from 'url';
-import { generateVerificationEmailHtml } from './templates';
+import { sendMailTemplate } from './templates';
 
 @Injectable()
 export default class MailerService {
@@ -33,7 +33,7 @@ export default class MailerService {
         from: process.env.FROM,
         to: email,
         subject: 'You have won a lottery',
-        html: generateVerificationEmailHtml(content, url.toString()),
+        html: sendMailTemplate(content, url.toString()),
       };
       await transporter.sendMail(mailOptions);
     } catch (error) {

@@ -1,7 +1,4 @@
-export const generateVerificationEmailHtml = (
-  content: string,
-  link: string,
-): string => `
+export const sendMailTemplate = (content: string, link: string): string => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
