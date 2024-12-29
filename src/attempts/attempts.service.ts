@@ -22,9 +22,7 @@ export class AttemptsService {
     return this.attemptModel.find().exec();
   }
 
-  update(id: string, updateAttemptDto: UpdateAttemptDto) {
-    return this.attemptModel.findByIdAndUpdate(id, updateAttemptDto, {
-      new: true,
-    });
+  update(id: string) {
+    return this.attemptModel.findByIdAndUpdate(id, { triggered: true });
   }
 }

@@ -12,8 +12,8 @@ export default class MailerService {
     return nodemailer.createTransport({
       host: process.env.HOST,
       port: process.env.MAIL_PORT,
-      secure: process.env.SECURE_MAIL,
-      service: process.env.MAILER_SERVICE,
+      secure: process.env.SECURE,
+      service: process.env.SERVICE,
       auth: {
         user: process.env.MAILER_USER,
         pass: process.env.PASSWORD,
@@ -24,9 +24,9 @@ export default class MailerService {
   async sendMail(email: string, link: string): Promise<void> {
     try {
       const transporter = this.getTransport();
-      const url = new URL(`${this.baseUrl}/attempt/update`);
+      const url = new URL(`${this.baseUrl}/attempts/update`);
       const params = new URLSearchParams({
-        link,
+        id: link,
       });
       url.search = params.toString();
       const mailOptions = {
@@ -37,7 +37,8 @@ export default class MailerService {
       };
       await transporter.sendMail(mailOptions);
     } catch (error) {
-      throw Error('Failed to send verification email');
+      console.log(error);
+      throw Error('failed to send email');
     }
   }
 }

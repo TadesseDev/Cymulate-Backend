@@ -24,6 +24,8 @@ Cymulate Backend is a server-side application designed to enhance cybersecurity 
 
 1. **Configure Environment Variables**:
 
+> the project is configured to be use with a gmail account, prepare a gmail account with a APP password
+
 ```env
 # Database Configuration
 MONGODB_URI=mongodb://host:port/db
