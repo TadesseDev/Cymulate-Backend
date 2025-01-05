@@ -11,6 +11,7 @@ export class AttemptsService {
     @InjectModel(Attempt.name) private readonly attemptModel: Model<Attempt>,
     private readonly mailer: MailerService,
   ) {}
+  mailLinkStatus: { sentAt: Date; id: string }[] = [];
   async create(createAttemptDto: CreateAttemptDto) {
     const result = await this.attemptModel.create(createAttemptDto);
     await this.mailer.sendMail(
@@ -18,6 +19,7 @@ export class AttemptsService {
       createAttemptDto.content,
       result._id.toString(),
     );
+    this.mailLinkStatus.push({ sentAt: new Date(), id: result._id.toString() });
     return result;
   }
 
@@ -26,6 +28,12 @@ export class AttemptsService {
   }
 
   update(id: string) {
+    const triggerTime = new Date(
+      this.mailLinkStatus.find((link) => link.id === id).sentAt,
+    );
+    const now = new Date();
+    triggerTime.setTime(triggerTime.getTime() + 60);
+    if (triggerTime < now) throw new Error('link expires');
     return this.attemptModel.findByIdAndUpdate(id, { triggered: true });
   }
 }

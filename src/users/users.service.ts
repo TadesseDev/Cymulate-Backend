@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.userModel.findById(id).lean().exec();
   }
 
   findByEmail(email: string) {
