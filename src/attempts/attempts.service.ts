@@ -28,8 +28,8 @@ export class AttemptsService {
     return this.attemptModel.find().exec();
   }
 
-  update(id: string) {
-    const payload = this.jwtService.verify(id);
+  update(token: string) {
+    const payload = this.jwtService.verify(token);
     const triggerTime = new Date(payload.date);
     const now = new Date();
     triggerTime.setMinutes(triggerTime.getMinutes() + 1);
